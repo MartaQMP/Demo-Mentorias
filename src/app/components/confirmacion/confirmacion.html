@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+
+<div class="confirmacion-container">
+  <!-- Alert de Éxito -->
+  <div class="success-alert" *ngIf="mostrarExito" [@fadeInOut]>
+    <div class="alert-content">
+      <div class="alert-icon">✓</div>
+      <div class="alert-text">
+        <h3>¡Cita Confirmada!</h3>
+        <p>
+          Se ha enviado un correo avisando de la cita con los detalles de tu mentoría de Tech
+          Riders, y se irán mandando recordatorios cuando se acerque la fecha.
+        </p>
+      </div>
+      <button class="alert-close" (click)="cerrarExito()">×</button>
+    </div>
+  </div>
+
+  <!-- Contenido Principal -->
+  <div class="confirmation-section" *ngIf="!mostrarExito">
+    <div class="confirmation-card">
+      <h1>Resumen de tu Mentoría</h1>
+      <p class="subtitle">Verifica los detalles antes de confirmar tu cita</p>
+
+      <div class="details-grid">
+        <div class="detail-item">
+          <label class="detail-label">Tema de Mentoría</label>
+          <div class="detail-value">{{ mentoriaData.tema }}</div>
+        </div>
+
+        <div class="detail-item">
+          <label class="detail-label">Fecha Programada</label>
+          <div class="detail-value">{{ formatearFecha(mentoriaData.fecha) }}</div>
+        </div>
+
+        <div class="detail-item">
+          <label class="detail-label">Mentor Asignado</label>
+          <div class="detail-value mentor-badge-large">
+            {{ mentoriaData.mentorAsignado }}
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="action-buttons">
+        <button (click)="confirmarCita()" class="btn-confirmar">Confirmar Cita</button>
+        <a routerLink="/home" class="btn-volver"> Volver al Inicio </a>
+      </div>
+    </div>
+  </div>
+</div>

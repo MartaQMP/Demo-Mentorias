@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+
+<div class="mentoria-container">
+  <div class="form-section">
+    <div class="form-card">
+      <h1>Solicita una Mentoría</h1>
+      <p class="subtitle">Cuéntanos sobre qué tema necesitas orientación profesional</p>
+
+      <form [formGroup]="formulario" (ngSubmit)="revisarCita()" class="mentoria-form">
+        <div class="form-group">
+          <label for="tema">Tema o Materia <span class="required">*</span></label>
+          <input
+            type="text"
+            id="tema"
+            formControlName="tema"
+            placeholder="Ej: Angular, Node.js, Arquitectura de Software..."
+            class="form-input"
+          />
+          <span
+            class="error-message"
+            *ngIf="formulario.get('tema')?.invalid && formulario.get('tema')?.touched"
+          >
+            Por favor ingresa un tema válido (mínimo 3 caracteres)
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="fecha">Fecha Deseada <span class="required">*</span></label>
+          <input type="date" id="fecha" formControlName="fecha" class="form-input date-input" />
+          <span
+            class="error-message"
+            *ngIf="formulario.get('fecha')?.invalid && formulario.get('fecha')?.touched"
+          >
+            Por favor selecciona una fecha válida
+          </span>
+        </div>
+
+        <div class="mentor-assignment" *ngIf="mentorAsignado > 0">
+          <div class="mentor-badge">
+            <span class="mentor-label">Mentor Asignado:</span>
+            <span class="mentor-number">Mentor {{ mentorAsignado }}</span>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="!formulario.valid" class="btn-revisar">
+          Revisar Cita
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

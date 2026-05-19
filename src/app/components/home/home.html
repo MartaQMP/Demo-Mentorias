@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">SOMOS TECH RIDERS</h1>
+      <p class="hero-subtitle">La plataforma líder de mentorías tecnológicas profesionales</p>
+      <button class="btn-mentoria" (click)="irAMentoria()">
+        <span class="btn-icon">→</span>
+        Pedir Mentoría
+      </button>
+    </div>
+    <div class="hero-overlay"></div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="features-container">
+      <h2>¿Por qué Tech Riders?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">💡</div>
+          <h3>Expertos Calificados</h3>
+          <p>Mentores con años de experiencia en la industria tecnológica</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h3>Crecimiento Rápido</h3>
+          <p>Acelera tu carrera con orientación personalizada</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Objetivos Claros</h3>
+          <p>Define tus metas y avanza junto a profesionales experimentados</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>¿Listo para transformar tu carrera?</h2>
+      <p>Solicita una mentoría hoy y comienza tu viaje hacia el éxito</p>
+      <button class="btn-mentoria-large" (click)="irAMentoria()">Comenzar Ahora</button>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,219 @@
+.mentoria-container {
+  min-height: calc(100vh - 70px);
+  background-color: #f8f9fa;
+  padding: 3rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-section {
+  width: 100%;
+  max-width: 600px;
+}
+
+.form-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  color: #24385b;
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin: 0 0 2.5rem 0;
+  line-height: 1.5;
+}
+
+.mentoria-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  color: #24385b;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+}
+
+.required {
+  color: #d32f2f;
+}
+
+.form-input {
+  padding: 0.9rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #00bcd4;
+  box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
+}
+
+.form-input::placeholder {
+  color: #aaa;
+}
+
+.date-input {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+.mentor-assignment {
+  background: linear-gradient(135deg, rgba(0, 188, 212, 0.1), rgba(0, 188, 212, 0.05));
+  border: 2px solid #00bcd4;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mentor-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.mentor-label {
+  color: #24385b;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.mentor-number {
+  background: linear-gradient(135deg, #00bcd4, #0097a7);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  min-width: 120px;
+  text-align: center;
+}
+
+.btn-revisar {
+  padding: 1.1rem 2rem;
+  background: linear-gradient(135deg, #24385b 0%, #1a2a44 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-revisar:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1a2a44 0%, #0f1622 100%);
+  box-shadow: 0 8px 25px rgba(36, 56, 91, 0.4);
+  transform: translateY(-3px);
+}
+
+.btn-revisar:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn-revisar:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .mentoria-container {
+    padding: 2rem 1rem;
+  }
+
+  .form-card {
+    padding: 2rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mentoria-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .form-card {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .form-group {
+    gap: 0.4rem;
+  }
+
+  .mentor-badge {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}
