@@ -1,0 +1,173 @@
+.navbar {
+  background-color: #24385b;
+  padding: 0;
+  border-bottom: 2px solid #30d5e8;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.navbar-logo {
+  flex-shrink: 0;
+  margin-right: 2rem;
+}
+
+.navbar-logo a {
+  display: block;
+}
+
+.logo-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1.2rem;
+  border-bottom: 2px solid transparent;
+  display: block;
+}
+
+.nav-link:hover {
+  color: #30d5e8;
+  border-bottom-color: #30d5e8;
+}
+
+.nav-link.active {
+  color: #30d5e8;
+  border-bottom-color: #30d5e8;
+}
+
+.navbar-auth {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.btn-login,
+.btn-logout {
+  padding: 0.6rem 1.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+}
+
+.btn-login {
+  background-color: #30d5e8;
+  color: #24385b;
+}
+
+.btn-login:hover {
+  background-color: #00a3b8;
+  color: white;
+}
+
+.btn-logout {
+  background-color: transparent;
+  color: white;
+  border: 2px solid #30d5e8;
+}
+
+.btn-logout:hover {
+  background-color: #30d5e8;
+  color: #24385b;
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0.8rem 1rem;
+  }
+
+  .navbar-logo {
+    margin-right: 1rem;
+  }
+
+  .logo-img {
+    height: 40px;
+  }
+
+  .navbar-menu {
+    gap: 0;
+    flex: 1;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .btn-login,
+  .btn-logout {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-container {
+    flex-wrap: wrap;
+    padding: 0.6rem;
+  }
+
+  .navbar-logo {
+    margin-right: 0.5rem;
+  }
+
+  .logo-img {
+    height: 35px;
+  }
+
+  .navbar-menu {
+    order: 3;
+    width: 100%;
+    margin-top: 0.8rem;
+  }
+
+  .nav-link {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .navbar-auth {
+    margin-left: auto;
+  }
+
+  .btn-login,
+  .btn-logout {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+}

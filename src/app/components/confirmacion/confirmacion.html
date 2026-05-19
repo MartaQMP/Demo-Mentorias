@@ -2,17 +2,17 @@
 
 <div class="confirmacion-container">
   <!-- Alert de Éxito -->
-  <div class="success-alert" *ngIf="mostrarExito" [@fadeInOut]>
+  <div class="success-alert" *ngIf="mostrarExito">
     <div class="alert-content">
-      <div class="alert-icon">✓</div>
+      <div class="alert-icon">OK</div>
       <div class="alert-text">
-        <h3>¡Cita Confirmada!</h3>
+        <h3>Cita Confirmada</h3>
         <p>
           Se ha enviado un correo avisando de la cita con los detalles de tu mentoría de Tech
-          Riders, y se irán mandando recordatorios cuando se acerque la fecha.
+          Riders. Se irán mandando recordatorios cuando se acerque la fecha.
         </p>
       </div>
-      <button class="alert-close" (click)="cerrarExito()">×</button>
+      <button class="alert-close" (click)="cerrarExito()">CERRAR</button>
     </div>
   </div>
 
@@ -22,30 +22,59 @@
       <h1>Resumen de tu Mentoría</h1>
       <p class="subtitle">Verifica los detalles antes de confirmar tu cita</p>
 
-      <div class="details-grid">
-        <div class="detail-item">
-          <label class="detail-label">Tema de Mentoría</label>
-          <div class="detail-value">{{ mentoriaData.tema }}</div>
-        </div>
-
-        <div class="detail-item">
-          <label class="detail-label">Fecha Programada</label>
-          <div class="detail-value">{{ formatearFecha(mentoriaData.fecha) }}</div>
-        </div>
-
-        <div class="detail-item">
-          <label class="detail-label">Mentor Asignado</label>
-          <div class="detail-value mentor-badge-large">
-            {{ mentoriaData.mentorAsignado }}
+      <div class="details-sections">
+        <section class="section">
+          <h3 class="section-title">Información Personal</h3>
+          <div class="details-grid">
+            <div class="detail-item">
+              <label class="detail-label">Nombre</label>
+              <div class="detail-value">{{ mentoriaData.nombre }} {{ mentoriaData.apellidos }}</div>
+            </div>
+            <div class="detail-item">
+              <label class="detail-label">Teléfono</label>
+              <div class="detail-value">{{ mentoriaData.telefono }}</div>
+            </div>
+            <div class="detail-item">
+              <label class="detail-label">Tipo de Usuario</label>
+              <div class="detail-value">{{ mentoriaData.tipoUsuario | titlecase }}</div>
+            </div>
+            <div class="detail-item" *ngIf="mentoriaData.centro">
+              <label class="detail-label">Centro / Institución</label>
+              <div class="detail-value">{{ mentoriaData.centro }}</div>
+            </div>
           </div>
-        </div>
+        </section>
+
+        <section class="section">
+          <h3 class="section-title">Detalles de la Mentoría</h3>
+          <div class="details-grid">
+            <div class="detail-item">
+              <label class="detail-label">Tema</label>
+              <div class="detail-value">{{ mentoriaData.tema }}</div>
+            </div>
+            <div class="detail-item">
+              <label class="detail-label">Fecha</label>
+              <div class="detail-value">{{ formatearFecha(mentoriaData.fecha) }}</div>
+            </div>
+            <div class="detail-item">
+              <label class="detail-label">Hora</label>
+              <div class="detail-value">{{ mentoriaData.hora }}</div>
+            </div>
+            <div class="detail-item">
+              <label class="detail-label">Mentor Asignado</label>
+              <div class="detail-value mentor-badge-large">
+                Mentor {{ mentoriaData.mentorAsignado }}
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
 
       <div class="divider"></div>
 
       <div class="action-buttons">
         <button (click)="confirmarCita()" class="btn-confirmar">Confirmar Cita</button>
-        <a routerLink="/home" class="btn-volver"> Volver al Inicio </a>
+        <a routerLink="/" class="btn-volver">Volver al Inicio</a>
       </div>
     </div>
   </div>

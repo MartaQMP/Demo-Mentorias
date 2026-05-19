@@ -1,0 +1,111 @@
+<app-navbar></app-navbar>
+
+<div class="registro-container">
+  <div class="registro-card">
+    <div class="logo-section">
+      <img src="/assets/TechRiders.png" alt="Tech Riders Logo" class="logo-img" />
+    </div>
+
+    <h1>Crear Cuenta</h1>
+    <p class="subtitle">Únete a Tech Riders</p>
+
+    <div *ngIf="mensajeExito" class="mensaje-exito">
+      {{ mensajeExito }}
+    </div>
+
+    <form [formGroup]="formulario" (ngSubmit)="registrarse()">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input
+          type="text"
+          id="nombre"
+          formControlName="nombre"
+          placeholder="Tu nombre"
+          class="form-input"
+        />
+        <span
+          class="error-message"
+          *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched"
+        >
+          Nombre requerido (mínimo 2 caracteres)
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="apellidos">Apellidos</label>
+        <input
+          type="text"
+          id="apellidos"
+          formControlName="apellidos"
+          placeholder="Tus apellidos"
+          class="form-input"
+        />
+        <span
+          class="error-message"
+          *ngIf="formulario.get('apellidos')?.invalid && formulario.get('apellidos')?.touched"
+        >
+          Apellidos requeridos (mínimo 2 caracteres)
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="tu.email@ejemplo.com"
+          class="form-input"
+        />
+        <span
+          class="error-message"
+          *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched"
+        >
+          Email válido requerido
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Tu contraseña"
+          class="form-input"
+        />
+        <span class="error-hint" *ngIf="formulario.get('password')?.touched && getPasswordError()">
+          {{ getPasswordError() }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmar">Confirmar Contraseña</label>
+        <input
+          type="password"
+          id="confirmar"
+          formControlName="confirmar"
+          placeholder="Confirma tu contraseña"
+          class="form-input"
+        />
+        <span
+          class="error-message"
+          *ngIf="formulario.hasError('passwordMismatch') && formulario.get('confirmar')?.touched"
+        >
+          Las contraseñas no coinciden
+        </span>
+      </div>
+
+      <button type="submit" [disabled]="!formulario.valid" class="btn-registrar">
+        Registrarse
+      </button>
+    </form>
+
+    <div class="footer-section">
+      <p>
+        ¿Ya tienes cuenta?
+        <a routerLink="/login" class="link-login">Inicia sesión</a>
+      </p>
+    </div>
+  </div>
+</div>

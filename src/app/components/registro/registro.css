@@ -1,4 +1,4 @@
-.login-container {
+.registro-container {
   min-height: calc(100vh - 78px);
   background-color: #f4f6f9;
   display: flex;
@@ -7,12 +7,12 @@
   padding: 3rem 2rem;
 }
 
-.login-card {
+.registro-card {
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   padding: 3rem;
-  max-width: 400px;
+  max-width: 450px;
   width: 100%;
 }
 
@@ -23,7 +23,7 @@
   border-bottom: 1px solid #e8e8e8;
 }
 
-.login-logo {
+.logo-img {
   height: 70px;
   width: auto;
   object-fit: contain;
@@ -42,6 +42,16 @@ h1 {
   text-align: center;
   font-size: 0.9rem;
   margin: 0 0 2rem 0;
+}
+
+.mensaje-exito {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  text-align: center;
 }
 
 .form-group {
@@ -83,7 +93,14 @@ label {
   margin-top: 0.3rem;
 }
 
-.btn-entrar {
+.error-hint {
+  display: block;
+  color: #f57c00;
+  font-size: 0.75rem;
+  margin-top: 0.3rem;
+}
+
+.btn-registrar {
   width: 100%;
   padding: 0.85rem;
   background-color: #24385b;
@@ -97,12 +114,12 @@ label {
   margin-top: 1.5rem;
 }
 
-.btn-entrar:hover:not(:disabled) {
+.btn-registrar:hover:not(:disabled) {
   background-color: #1a2a44;
   box-shadow: 0 4px 15px rgba(36, 56, 91, 0.25);
 }
 
-.btn-entrar:disabled {
+.btn-registrar:disabled {
   background-color: #ccc;
   cursor: not-allowed;
   opacity: 0.6;
@@ -115,19 +132,19 @@ label {
   color: #666;
 }
 
-.link-registro {
+.link-login {
   color: #30d5e8;
   text-decoration: none;
   font-weight: 600;
   margin-left: 0.3rem;
 }
 
-.link-registro:hover {
+.link-login:hover {
   text-decoration: underline;
 }
 
 @media (max-width: 600px) {
-  .login-card {
+  .registro-card {
     padding: 2rem;
   }
 
@@ -139,7 +156,7 @@ label {
     font-size: 0.85rem;
   }
 
-  .login-logo {
+  .logo-img {
     height: 60px;
   }
 }

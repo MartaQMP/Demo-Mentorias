@@ -1,11 +1,13 @@
+<app-navbar></app-navbar>
+
 <div class="login-container">
   <div class="login-card">
     <div class="logo-section">
       <img src="/assets/TechRiders.png" alt="Tech Riders Logo" class="login-logo" />
     </div>
 
-    <h1>Bienvenido a Tech Riders</h1>
-    <p class="subtitle">Plataforma de Mentorías Tecnológicas</p>
+    <h1>Iniciar Sesión</h1>
+    <p class="subtitle">Accede a tu cuenta en Tech Riders</p>
 
     <form [formGroup]="formulario" (ngSubmit)="entrar()">
       <div class="form-group">
@@ -38,13 +40,20 @@
           class="error-message"
           *ngIf="formulario.get('password')?.invalid && formulario.get('password')?.touched"
         >
-          Contraseña requerida (mín. 6 caracteres)
+          Contraseña requerida
         </span>
       </div>
 
-      <button type="submit" [disabled]="!formulario.valid" class="btn-entrar">Entrar</button>
+      <button type="submit" [disabled]="!formulario.valid" class="btn-entrar">
+        Iniciar Sesión
+      </button>
     </form>
 
-    <p class="footer-text">© 2026 Tech Riders. Todos los derechos reservados.</p>
+    <div class="footer-section">
+      <p>
+        ¿No tienes cuenta?
+        <a routerLink="/registro" class="link-registro">Crear una nueva</a>
+      </p>
+    </div>
   </div>
 </div>

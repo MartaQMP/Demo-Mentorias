@@ -1,0 +1,186 @@
+.panel-container {
+  min-height: calc(100vh - 78px);
+  background-color: #f4f6f9;
+  padding: 3rem 2rem;
+}
+
+.panel-header {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.panel-header h1 {
+  color: #24385b;
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.panel-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.solicitudes-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.solicitudes-table thead {
+  background-color: #24385b;
+  color: white;
+}
+
+.solicitudes-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-bottom: 2px solid #30d5e8;
+}
+
+.solicitudes-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e8e8e8;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.solicitud-row:hover {
+  background-color: #f9fafb;
+}
+
+.solicitud-row:hover td {
+  background-color: inherit;
+}
+
+.sin-dato {
+  color: #999;
+  font-style: italic;
+}
+
+.tema-cell {
+  font-weight: 500;
+  color: #24385b;
+}
+
+.telefono-link {
+  color: #30d5e8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.telefono-link:hover {
+  color: #00a3b8;
+  text-decoration: underline;
+}
+
+.total-solicitudes {
+  text-align: right;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e8e8e8;
+  color: #24385b;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 1024px) {
+  .solicitudes-table th,
+  .solicitudes-table td {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .solicitudes-table th {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .panel-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .panel-content {
+    padding: 1.5rem;
+  }
+
+  .panel-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .solicitudes-table th,
+  .solicitudes-table td {
+    padding: 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .solicitudes-table th {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .panel-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .panel-content {
+    padding: 1rem;
+    border-radius: 6px;
+  }
+
+  .panel-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .solicitudes-table {
+    font-size: 0.8rem;
+  }
+
+  .solicitudes-table th,
+  .solicitudes-table td {
+    padding: 0.5rem;
+  }
+
+  .solicitudes-table th {
+    font-size: 0.7rem;
+  }
+
+  .telefono-link {
+    font-weight: 500;
+    display: block;
+    word-break: break-word;
+  }
+
+  .total-solicitudes {
+    font-size: 0.85rem;
+  }
+}

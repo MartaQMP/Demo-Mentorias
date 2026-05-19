@@ -3,38 +3,140 @@
 <div class="mentoria-container">
   <div class="form-section">
     <div class="form-card">
-      <h1>Solicita una Mentoría</h1>
-      <p class="subtitle">Cuéntanos sobre qué tema necesitas orientación profesional</p>
+      <h1>Solicitar Mentoría</h1>
+      <p class="subtitle">Completa el formulario para solicitar una mentoría personalizada</p>
 
       <form [formGroup]="formulario" (ngSubmit)="revisarCita()" class="mentoria-form">
-        <div class="form-group">
-          <label for="tema">Tema o Materia <span class="required">*</span></label>
-          <input
-            type="text"
-            id="tema"
-            formControlName="tema"
-            placeholder="Ej: Angular, Node.js, Arquitectura de Software..."
-            class="form-input"
-          />
-          <span
-            class="error-message"
-            *ngIf="formulario.get('tema')?.invalid && formulario.get('tema')?.touched"
-          >
-            Por favor ingresa un tema válido (mínimo 3 caracteres)
-          </span>
-        </div>
+        <!-- Información Personal -->
+        <fieldset class="fieldset">
+          <legend>Información Personal</legend>
 
-        <div class="form-group">
-          <label for="fecha">Fecha Deseada <span class="required">*</span></label>
-          <input type="date" id="fecha" formControlName="fecha" class="form-input date-input" />
-          <span
-            class="error-message"
-            *ngIf="formulario.get('fecha')?.invalid && formulario.get('fecha')?.touched"
-          >
-            Por favor selecciona una fecha válida
-          </span>
-        </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre <span class="required">*</span></label>
+              <input
+                type="text"
+                id="nombre"
+                formControlName="nombre"
+                placeholder="Tu nombre"
+                class="form-input"
+              />
+              <span
+                class="error-message"
+                *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched"
+              >
+                Nombre requerido (mínimo 2 caracteres)
+              </span>
+            </div>
 
+            <div class="form-group">
+              <label for="apellidos">Apellidos <span class="required">*</span></label>
+              <input
+                type="text"
+                id="apellidos"
+                formControlName="apellidos"
+                placeholder="Tus apellidos"
+                class="form-input"
+              />
+              <span
+                class="error-message"
+                *ngIf="formulario.get('apellidos')?.invalid && formulario.get('apellidos')?.touched"
+              >
+                Apellidos requeridos (mínimo 2 caracteres)
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="telefono">Teléfono de Contacto <span class="required">*</span></label>
+            <input
+              type="tel"
+              id="telefono"
+              formControlName="telefono"
+              placeholder="Ej: 612345678"
+              class="form-input"
+            />
+            <span
+              class="error-message"
+              *ngIf="formulario.get('telefono')?.invalid && formulario.get('telefono')?.touched"
+            >
+              Teléfono válido requerido (mínimo 9 dígitos)
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="tipoUsuario">Tipo de Usuario <span class="required">*</span></label>
+            <select id="tipoUsuario" formControlName="tipoUsuario" class="form-input">
+              <option value="otro">Otro</option>
+              <option value="profesorado">Profesorado</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="centro">Centro o Institución (Opcional)</label>
+            <input
+              type="text"
+              id="centro"
+              formControlName="centro"
+              placeholder="Nombre del centro o institución"
+              class="form-input"
+            />
+          </div>
+        </fieldset>
+
+        <!-- Detalles de la Mentoría -->
+        <fieldset class="fieldset">
+          <legend>Detalles de la Mentoría</legend>
+
+          <div class="form-group">
+            <label for="tema">Tema o Materia <span class="required">*</span></label>
+            <input
+              type="text"
+              id="tema"
+              formControlName="tema"
+              placeholder="Ej: Angular, Node.js, Arquitectura de Software..."
+              class="form-input"
+            />
+            <span
+              class="error-message"
+              *ngIf="formulario.get('tema')?.invalid && formulario.get('tema')?.touched"
+            >
+              Tema requerido (mínimo 3 caracteres)
+            </span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fecha">Fecha Deseada <span class="required">*</span></label>
+              <input
+                type="date"
+                id="fecha"
+                formControlName="fecha"
+                [min]="fechaMinima"
+                class="form-input"
+              />
+              <span
+                class="error-message"
+                *ngIf="formulario.get('fecha')?.invalid && formulario.get('fecha')?.touched"
+              >
+                Fecha válida requerida
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="hora">Hora <span class="required">*</span></label>
+              <input type="time" id="hora" formControlName="hora" class="form-input" />
+              <span
+                class="error-message"
+                *ngIf="formulario.get('hora')?.invalid && formulario.get('hora')?.touched"
+              >
+                Hora requerida
+              </span>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Asignación de Mentor -->
         <div class="mentor-assignment" *ngIf="mentorAsignado > 0">
           <div class="mentor-badge">
             <span class="mentor-label">Mentor Asignado:</span>

@@ -1,0 +1,41 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-logo">
+      <a routerLink="/">
+        <img src="/assets/TechRiders.png" alt="Tech Riders Logo" class="logo-img" />
+      </a>
+    </div>
+    <ul class="navbar-menu">
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="nav-link"
+          >Inicio</a
+        >
+      </li>
+      <li *ngIf="usuario?.autenticado">
+        <a routerLink="/pedir-mentoria" routerLinkActive="active" class="nav-link"
+          >Pedir Mentoría</a
+        >
+      </li>
+      <li *ngIf="usuario?.autenticado">
+        <a routerLink="/panel-mentor" routerLinkActive="active" class="nav-link">Panel Mentor</a>
+      </li>
+    </ul>
+    <div class="navbar-auth">
+      <button *ngIf="usuario?.autenticado" (click)="logout()" class="btn-logout">
+        Cerrar Sesión
+      </button>
+      <a
+        *ngIf="!usuario?.autenticado"
+        routerLink="/login"
+        routerLinkActive="active"
+        class="btn-login"
+      >
+        Iniciar Sesión
+      </a>
+    </div>
+  </div>
+</nav>

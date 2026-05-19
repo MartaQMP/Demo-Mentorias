@@ -2,8 +2,14 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface MentoriaData {
+  nombre: string;
+  apellidos: string;
+  telefono: string;
+  tipoUsuario: 'profesorado' | 'otro';
+  centro?: string;
   tema: string;
   fecha: string;
+  hora: string;
   mentorAsignado: number;
 }
 
@@ -12,8 +18,14 @@ export interface MentoriaData {
 })
 export class MentoriaService {
   private mentoriaDataSubject = new BehaviorSubject<MentoriaData>({
+    nombre: '',
+    apellidos: '',
+    telefono: '',
+    tipoUsuario: 'otro',
+    centro: '',
     tema: '',
     fecha: '',
+    hora: '',
     mentorAsignado: 0,
   });
 
@@ -35,8 +47,14 @@ export class MentoriaService {
 
   limpiarDatos(): void {
     this.mentoriaDataSubject.next({
+      nombre: '',
+      apellidos: '',
+      telefono: '',
+      tipoUsuario: 'otro',
+      centro: '',
       tema: '',
       fecha: '',
+      hora: '',
       mentorAsignado: 0,
     });
   }

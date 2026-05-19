@@ -14,11 +14,17 @@ import { Navbar } from '../navbar/navbar';
 })
 export class Confirmacion implements OnInit {
   mentoriaData: MentoriaData = {
+    nombre: '',
+    apellidos: '',
+    telefono: '',
+    tipoUsuario: 'otro',
+    centro: '',
     tema: '',
     fecha: '',
+    hora: '',
     mentorAsignado: 0,
   };
-  mostrarExito = false;
+  mostrarExito: boolean = false;
 
   constructor(
     private mentoriaService: MentoriaService,
@@ -33,13 +39,13 @@ export class Confirmacion implements OnInit {
     this.mostrarExito = true;
     setTimeout(() => {
       this.mentoriaService.limpiarDatos();
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
     }, 4000);
   }
 
   cerrarExito(): void {
     this.mentoriaService.limpiarDatos();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
   formatearFecha(fechaStr: string): string {

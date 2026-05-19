@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+
+<div class="panel-container">
+  <div class="panel-header">
+    <h1>Panel de Mentor</h1>
+    <p class="subtitle">Solicitudes de mentoría recibidas</p>
+  </div>
+
+  <div class="panel-content">
+    <div class="table-responsive">
+      <table class="solicitudes-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Centro / Institución</th>
+            <th>Tema Solicitado</th>
+            <th>Persona de Contacto</th>
+            <th>Teléfono</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let solicitud of solicitudes" class="solicitud-row">
+            <td>{{ formatearFecha(solicitud.fecha) }}</td>
+            <td>{{ solicitud.hora }}</td>
+            <td>
+              <span *ngIf="solicitud.centro; else sinCentro">
+                {{ solicitud.centro }}
+              </span>
+              <ng-template #sinCentro>
+                <span class="sin-dato">Sin especificar</span>
+              </ng-template>
+            </td>
+            <td class="tema-cell">{{ solicitud.tema }}</td>
+            <td>{{ solicitud.nombre }}</td>
+            <td>
+              <a [href]="'tel:' + solicitud.telefono" class="telefono-link">
+                {{ solicitud.telefono }}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="total-solicitudes">
+      <strong>Total de solicitudes:</strong> {{ solicitudes.length }}
+    </div>
+  </div>
+</div>
