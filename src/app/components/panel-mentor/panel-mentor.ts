@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MentoriaService, CharlaProgamada } from '../../services/mentoria.service';
 import { Navbar } from '../navbar/navbar';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
 
 interface CalendarDay {
   date: Date;
@@ -44,7 +46,9 @@ export class PanelMentor implements OnInit {
     'Diciembre',
   ];
 
-  constructor(private mentoriaService: MentoriaService) {}
+  constructor(private mentoriaService: MentoriaService) {
+    registerLocaleData(localeEs);
+  }
 
   ngOnInit(): void {
     this.charlasProgramadas = this.mentoriaService.obtenerCharlasProgramadas();
