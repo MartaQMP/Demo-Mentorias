@@ -10,7 +10,7 @@
   text-align: center;
 }
 
-.panel-header h1 {
+h1 {
   color: #24385b;
   font-size: 2rem;
   margin: 0 0 0.5rem 0;
@@ -26,93 +26,291 @@
 .panel-content {
   max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* Sección del Calendario */
+.calendar-section {
   background: white;
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.table-responsive {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.solicitudes-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 2rem;
-}
-
-.solicitudes-table thead {
-  background-color: #24385b;
-  color: white;
-}
-
-.solicitudes-table th {
-  padding: 1rem;
-  text-align: left;
+.calendar-section h2 {
+  color: #24385b;
+  font-size: 1.2rem;
+  margin: 0 0 1.5rem 0;
   font-weight: 700;
+}
+
+.calendar-container {
+  background-color: #f9f9f9;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.day-header {
+  font-weight: 700;
+  color: #24385b;
+  text-align: center;
+  padding: 0.75rem 0.5rem;
   font-size: 0.85rem;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
-  border-bottom: 2px solid #30d5e8;
 }
 
-.solicitudes-table td {
-  padding: 1rem;
-  border-bottom: 1px solid #e8e8e8;
+.calendar-day {
+  aspect-ratio: 1;
+  border: 1px solid #ddd;
+  background-color: white;
   color: #333;
+  font-weight: 500;
+  cursor: default;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.calendar-day.other-month {
+  color: #ccc;
+  background-color: #f5f5f5;
+}
+
+.calendar-day.has-charlas {
+  cursor: pointer;
+  border: 2px solid #30d5e8;
+  background-color: white;
+  font-weight: 700;
+}
+
+.calendar-day.has-charlas:hover {
+  background-color: #e0f7fa;
+  transform: scale(1.05);
+}
+
+.calendar-day.selected {
+  background-color: #24385b;
+  color: white;
+  border-color: #24385b;
+}
+
+.dot {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: #30d5e8;
+  border-radius: 50%;
+}
+
+.calendar-day.selected .dot {
+  background-color: white;
+}
+
+.calendar-day:disabled {
+  cursor: not-allowed;
+}
+
+/* Recuadro Informativo */
+.charla-info {
+  margin-top: 1.5rem;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.info-box {
+  background-color: #e0f7fa;
+  border: 2px solid #30d5e8;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.info-box h3 {
+  color: #24385b;
+  margin: 0 0 0.8rem 0;
   font-size: 0.95rem;
 }
 
-.solicitud-row:hover {
-  background-color: #f9fafb;
+.charlas-list-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
-.solicitud-row:hover td {
-  background-color: inherit;
+.charla-compact {
+  background-color: white;
+  padding: 0.6rem 0.8rem;
+  border-radius: 4px;
+  border-left: 3px solid #30d5e8;
 }
 
-.sin-dato {
-  color: #999;
-  font-style: italic;
-}
-
-.tema-cell {
-  font-weight: 500;
+.charla-location {
   color: #24385b;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0 0 0.2rem 0;
 }
 
-.telefono-link {
-  color: #30d5e8;
-  text-decoration: none;
-  font-weight: 600;
+.charla-time {
+  color: #666;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Sección de Charlas Detalladas */
+.charlas-section {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.charlas-section h2 {
+  color: #24385b;
+  font-size: 1.2rem;
+  margin: 0 0 1.5rem 0;
+  font-weight: 700;
+}
+
+.charlas-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.charla-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #30d5e8;
   transition: all 0.3s ease;
 }
 
-.telefono-link:hover {
-  color: #00a3b8;
-  text-decoration: underline;
+.charla-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
 }
 
-.total-solicitudes {
-  text-align: right;
-  padding-top: 1.5rem;
+.charla-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.charla-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #30d5e8;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  min-width: 50px;
+  font-weight: 700;
+}
+
+.charla-date .day {
+  font-size: 1.2rem;
+}
+
+.charla-date .month {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.charla-main {
+  flex: 1;
+}
+
+.charla-tema {
+  color: #24385b;
+  margin: 0 0 0.3rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.charla-lugar {
+  color: #666;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.charla-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
   border-top: 1px solid #e8e8e8;
+  padding-top: 1rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.detail-label {
+  color: #24385b;
+  font-weight: 600;
+}
+
+.detail-value {
+  color: #666;
+}
+
+.phone-link {
+  color: #30d5e8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.phone-link:hover {
+  color: #24385b;
+}
+
+.mentor-badge {
+  background-color: #24385b;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-block;
+}
+
+.total-charlas {
+  text-align: center;
   color: #24385b;
   font-size: 0.95rem;
-}
-
-@media (max-width: 1024px) {
-  .solicitudes-table th,
-  .solicitudes-table td {
-    padding: 0.8rem;
-    font-size: 0.9rem;
-  }
-
-  .solicitudes-table th {
-    font-size: 0.8rem;
-  }
+  padding: 1.5rem 0;
+  border-top: 1px solid #e8e8e8;
 }
 
 @media (max-width: 768px) {
@@ -120,22 +318,29 @@
     padding: 2rem 1.5rem;
   }
 
-  .panel-content {
-    padding: 1.5rem;
+  .panel-header {
+    margin-bottom: 2rem;
   }
 
-  .panel-header h1 {
+  h1 {
     font-size: 1.5rem;
   }
 
-  .solicitudes-table th,
-  .solicitudes-table td {
-    padding: 0.7rem;
-    font-size: 0.85rem;
+  .charlas-container {
+    grid-template-columns: 1fr;
   }
 
-  .solicitudes-table th {
-    font-size: 0.75rem;
+  .calendar-grid {
+    gap: 0.3rem;
+  }
+
+  .calendar-day {
+    font-size: 0.8rem;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
   }
 }
 
@@ -144,43 +349,33 @@
     padding: 1.5rem 1rem;
   }
 
-  .panel-content {
-    padding: 1rem;
-    border-radius: 6px;
+  .calendar-section,
+  .charlas-section {
+    padding: 1.5rem;
   }
 
-  .panel-header h1 {
-    font-size: 1.3rem;
+  h1 {
+    font-size: 1.2rem;
   }
 
   .subtitle {
-    font-size: 0.9rem;
-  }
-
-  .table-responsive {
-    overflow-x: auto;
-  }
-
-  .solicitudes-table {
-    font-size: 0.8rem;
-  }
-
-  .solicitudes-table th,
-  .solicitudes-table td {
-    padding: 0.5rem;
-  }
-
-  .solicitudes-table th {
-    font-size: 0.7rem;
-  }
-
-  .telefono-link {
-    font-weight: 500;
-    display: block;
-    word-break: break-word;
-  }
-
-  .total-solicitudes {
     font-size: 0.85rem;
+  }
+
+  .charla-card {
+    padding: 1rem;
+  }
+
+  .calendar-grid {
+    gap: 0.2rem;
+  }
+
+  .day-header {
+    font-size: 0.7rem;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .calendar-day {
+    font-size: 0.7rem;
   }
 }

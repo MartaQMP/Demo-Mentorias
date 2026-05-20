@@ -3,48 +3,93 @@
 <div class="panel-container">
   <div class="panel-header">
     <h1>Panel de Mentor</h1>
-    <p class="subtitle">Solicitudes de mentoría recibidas</p>
+    <p class="subtitle">
+      Solicitudes de mentoría recibidas - Mes de {{ monthNames[currentMonth] }} {{ currentYear }}
+    </p>
   </div>
 
   <div class="panel-content">
-    <div class="table-responsive">
-      <table class="solicitudes-table">
-        <thead>
-          <tr>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>Centro / Institución</th>
-            <th>Tema Solicitado</th>
-            <th>Persona de Contacto</th>
-            <th>Teléfono</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let solicitud of solicitudes" class="solicitud-row">
-            <td>{{ formatearFecha(solicitud.fecha) }}</td>
-            <td>{{ solicitud.hora }}</td>
-            <td>
-              <span *ngIf="solicitud.centro; else sinCentro">
-                {{ solicitud.centro }}
-              </span>
-              <ng-template #sinCentro>
-                <span class="sin-dato">Sin especificar</span>
-              </ng-template>
-            </td>
-            <td class="tema-cell">{{ solicitud.tema }}</td>
-            <td>{{ solicitud.nombre }}</td>
-            <td>
-              <a [href]="'tel:' + solicitud.telefono" class="telefono-link">
-                {{ solicitud.telefono }}
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Sección del Calendario -->
+    <div class="calendar-section">
+      <h2>Calendario de Charlas</h2>
+      <div class="calendar-container">
+        <div class="calendar-grid">
+          <div class="day-header" *ngFor="let dayName of daysOfWeek">
+            {{ dayName }}
+          </div>
+
+          <button
+            type="button"
+            *ngFor="let day of calendarDays"
+            class="calendar-day"
+            [ngClass]="{
+              'other-month': !day.isCurrentMonth,
+              'has-charlas': day.hasCharlas,
+              selected: selectedDay === day.day,
+            }"
+            (click)="selectDay(day)"
+            [disabled]="!day.hasCharlas || !day.isCurrentMonth"
+          >
+            {{ day.day }}
+            <span class="dot" *ngIf="day.hasCharlas && day.isCurrentMonth"></span>
+          </button>
+        </div>
+
+        <!-- Recuadro Informativo de Charla Seleccionada -->
+        <div class="charla-info" *ngIf="selectedDay && charlasSelecionadas.length > 0">
+          <div class="info-box">
+            <h3>Charlas en {{ selectedDay }} de {{ monthNames[currentMonth] }}:</h3>
+            <div class="charlas-list-compact">
+              <div class="charla-compact" *ngFor="let charla of charlasSelecionadas">
+                <p class="charla-location">Charla en: {{ charla.centro }}</p>
+                <p class="charla-time">{{ charla.hora }} - {{ charla.tema }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="total-solicitudes">
-      <strong>Total de solicitudes:</strong> {{ solicitudes.length }}
+    <!-- Sección de Lista Detallada -->
+    <div class="charlas-section">
+      <h2>Solicitudes Detalladas</h2>
+      <div class="charlas-container">
+        <div class="charla-card" *ngFor="let charla of charlasProgramadas">
+          <div class="charla-header">
+            <div class="charla-date">
+              <span class="day">{{ charla.fecha | date: 'dd' }}</span>
+              <span class="month">{{ charla.fecha | date: 'MMM' : '' : 'es-ES' }}</span>
+            </div>
+            <div class="charla-main">
+              <h3 class="charla-tema">{{ charla.tema }}</h3>
+              <p class="charla-lugar"><strong>Lugar:</strong> {{ charla.centro }}</p>
+            </div>
+          </div>
+
+          <div class="charla-details">
+            <div class="detail-row">
+              <span class="detail-label">Hora:</span>
+              <span class="detail-value">{{ charla.hora }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Contacto:</span>
+              <span class="detail-value">{{ charla.nombre }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Teléfono:</span>
+              <a [href]="'tel:' + charla.telefono" class="phone-link">{{ charla.telefono }}</a>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Mentor Asignado:</span>
+              <span class="mentor-badge">Mentor {{ charla.mentorAsignado }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="total-charlas">
+        <strong>Total de solicitudes:</strong> {{ charlasProgramadas.length }}
+      </div>
     </div>
   </div>
 </div>

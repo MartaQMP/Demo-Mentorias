@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MentoriaService, CharlaProgamada } from '../../services/mentoria.service';
 import { Navbar } from '../navbar/navbar';
 
-export interface SolicitudMentoria {
-  id: number;
-  nombre: string;
-  telefono: string;
-  fecha: string;
-  hora: string;
-  centro: string;
-  tema: string;
+interface CalendarDay {
+  date: Date;
+  day: number;
+  month: number;
+  year: number;
+  isCurrentMonth: boolean;
+  hasCharlas: boolean;
+  charlas: CharlaProgamada[];
 }
 
 @Component({
@@ -19,63 +20,106 @@ export interface SolicitudMentoria {
   templateUrl: './panel-mentor.html',
   styleUrl: './panel-mentor.css',
 })
-export class PanelMentor {
-  solicitudes: SolicitudMentoria[] = [
-    {
-      id: 1,
-      nombre: 'Juan García López',
-      telefono: '612345678',
-      fecha: '2026-06-15',
-      hora: '10:00',
-      centro: 'Instituto Técnico Central',
-      tema: 'Angular y TypeScript',
-    },
-    {
-      id: 2,
-      nombre: 'María Rodríguez Martín',
-      telefono: '687654321',
-      fecha: '2026-06-18',
-      hora: '14:30',
-      centro: 'Universidad Politécnica',
-      tema: 'Node.js Backend',
-    },
-    {
-      id: 3,
-      nombre: 'Carlos Fernández López',
-      telefono: '654987321',
-      fecha: '2026-06-20',
-      hora: '11:00',
-      centro: 'Instituto Superior de Tecnología',
-      tema: 'Arquitectura de Software',
-    },
-    {
-      id: 4,
-      nombre: 'Ana María González Pérez',
-      telefono: '629876543',
-      fecha: '2026-06-22',
-      hora: '15:00',
-      centro: '',
-      tema: 'Web Moderna - React',
-    },
-    {
-      id: 5,
-      nombre: 'David López Sánchez',
-      telefono: '698765432',
-      fecha: '2026-06-25',
-      hora: '09:30',
-      centro: 'Escuela de Código',
-      tema: 'DevOps y Docker',
-    },
-    {
-      id: 6,
-      nombre: 'Laura Martínez García',
-      telefono: '645123456',
-      fecha: '2026-06-28',
-      hora: '13:00',
-      centro: 'Centro de Formación Digital',
-      tema: 'Bases de Datos SQL',
-    },
+export class PanelMentor implements OnInit {
+  charlasProgramadas: CharlaProgamada[] = [];
+  calendarDays: CalendarDay[] = [];
+  currentDate: Date = new Date();
+  currentMonth: number = this.currentDate.getMonth();
+  currentYear: number = this.currentDate.getFullYear();
+  selectedDay: number | null = null;
+  charlasSelecionadas: CharlaProgamada[] = [];
+  daysOfWeek: string[] = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sab'];
+  monthNames: string[] = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre',
   ];
+
+  constructor(private mentoriaService: MentoriaService) {}
+
+  ngOnInit(): void {
+    this.charlasProgramadas = this.mentoriaService.obtenerCharlasProgramadas();
+    this.generarCalendario();
+  }
+
+  private generarCalendario(): void {
+    this.calendarDays = [];
+    const primerDia = new Date(this.currentYear, this.currentMonth, 1);
+    const ultimoDia = new Date(this.currentYear, this.currentMonth + 1, 0);
+    const diaSemanaPrimer = primerDia.getDay();
+    const diasConCharlas = this.mentoriaService.obtenerDiasConCharlas();
+
+    // Días del mes anterior
+    const diasMesAnterior = new Date(this.currentYear, this.currentMonth, 0).getDate();
+    for (let i = diaSemanaPrimer - 1; i >= 0; i--) {
+      const day = diasMesAnterior - i;
+      const date = new Date(this.currentYear, this.currentMonth - 1, day);
+      this.calendarDays.push({
+        date,
+        day,
+        month: this.currentMonth - 1,
+        year: this.currentYear,
+        isCurrentMonth: false,
+        hasCharlas: false,
+        charlas: [],
+      });
+    }
+
+    // Días del mes actual
+    for (let day = 1; day <= ultimoDia.getDate(); day++) {
+      const date = new Date(this.currentYear, this.currentMonth, day);
+      const hasCharlas = diasConCharlas.includes(day);
+      const charlas = this.mentoriaService.obtenerCharlasPorDia(day);
+
+      this.calendarDays.push({
+        date,
+        day,
+        month: this.currentMonth,
+        year: this.currentYear,
+        isCurrentMonth: true,
+        hasCharlas,
+        charlas,
+      });
+    }
+
+    // Días del mes siguiente
+    const diasRestantes = 42 - this.calendarDays.length;
+    for (let day = 1; day <= diasRestantes; day++) {
+      const date = new Date(this.currentYear, this.currentMonth + 1, day);
+      this.calendarDays.push({
+        date,
+        day,
+        month: this.currentMonth + 1,
+        year: this.currentYear,
+        isCurrentMonth: false,
+        hasCharlas: false,
+        charlas: [],
+      });
+    }
+  }
+
+  selectDay(calendarDay: CalendarDay): void {
+    if (!calendarDay.isCurrentMonth || !calendarDay.hasCharlas) {
+      return;
+    }
+
+    this.selectedDay = this.selectedDay === calendarDay.day ? null : calendarDay.day;
+
+    if (this.selectedDay) {
+      this.charlasSelecionadas = calendarDay.charlas;
+    } else {
+      this.charlasSelecionadas = [];
+    }
+  }
 
   formatearFecha(fecha: string): string {
     const date = new Date(fecha);
@@ -84,5 +128,9 @@ export class PanelMentor {
       month: 'long',
       day: 'numeric',
     });
+  }
+
+  obtenerNombresCharlas(charlas: CharlaProgamada[]): string {
+    return charlas.map((c) => c.centro || 'Sin especificar').join(', ');
   }
 }

@@ -105,34 +105,67 @@
             </span>
           </div>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="fecha">Fecha Deseada <span class="required">*</span></label>
-              <input
-                type="date"
-                id="fecha"
-                formControlName="fecha"
-                [min]="fechaMinima"
-                class="form-input"
-              />
-              <span
-                class="error-message"
-                *ngIf="formulario.get('fecha')?.invalid && formulario.get('fecha')?.touched"
-              >
-                Fecha válida requerida
-              </span>
-            </div>
+          <!-- Calendario Embebido Visual -->
+          <div class="calendar-section">
+            <label>Fecha Deseada <span class="required">*</span></label>
+            <div class="calendar-container">
+              <div class="calendar-header">
+                <button
+                  type="button"
+                  class="nav-btn"
+                  (click)="previousMonth()"
+                  [disabled]="!canNavigatePrevious()"
+                >
+                  ANTERIOR
+                </button>
+                <h3 class="month-year">{{ monthNames[currentMonth] }} {{ currentYear }}</h3>
+                <button
+                  type="button"
+                  class="nav-btn"
+                  (click)="nextMonth()"
+                  [disabled]="!canNavigateNext()"
+                >
+                  SIGUIENTE
+                </button>
+              </div>
 
-            <div class="form-group">
-              <label for="hora">Hora <span class="required">*</span></label>
-              <input type="time" id="hora" formControlName="hora" class="form-input" />
-              <span
-                class="error-message"
-                *ngIf="formulario.get('hora')?.invalid && formulario.get('hora')?.touched"
-              >
-                Hora requerida
-              </span>
+              <div class="calendar-grid">
+                <div class="day-header" *ngFor="let dayName of daysOfWeek">
+                  {{ dayName }}
+                </div>
+
+                <button
+                  type="button"
+                  *ngFor="let day of calendarDays"
+                  class="calendar-day"
+                  [ngClass]="{
+                    'other-month': !day.isCurrentMonth,
+                    past: day.isPast && day.isCurrentMonth,
+                    today: day.isToday,
+                    selected: day.isSelected,
+                  }"
+                  (click)="selectDay(day)"
+                  [disabled]="day.isPast || !day.isCurrentMonth"
+                >
+                  {{ day.day }}
+                </button>
+              </div>
+
+              <div class="selected-date-display" *ngIf="selectedDate">
+                Fecha seleccionada: {{ selectedDate | date: 'dd/MM/yyyy' }}
+              </div>
             </div>
+          </div>
+
+          <div class="form-group">
+            <label for="hora">Hora <span class="required">*</span></label>
+            <input type="time" id="hora" formControlName="hora" class="form-input" />
+            <span
+              class="error-message"
+              *ngIf="formulario.get('hora')?.invalid && formulario.get('hora')?.touched"
+            >
+              Hora requerida
+            </span>
           </div>
         </fieldset>
 
@@ -144,7 +177,7 @@
           </div>
         </div>
 
-        <button type="submit" [disabled]="!formulario.valid" class="btn-revisar">
+        <button type="submit" [disabled]="!formulario.valid || !selectedDate" class="btn-revisar">
           Revisar Cita
         </button>
       </form>

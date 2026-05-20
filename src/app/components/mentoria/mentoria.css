@@ -9,7 +9,7 @@
 
 .form-section {
   width: 100%;
-  max-width: 650px;
+  max-width: 800px;
 }
 
 .form-card {
@@ -110,6 +110,141 @@ label {
   margin-top: 0.3rem;
 }
 
+/* Estilos del Calendario Embebido */
+.calendar-section {
+  margin-bottom: 1.5rem;
+}
+
+.calendar-section label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.calendar-container {
+  background-color: #f9f9f9;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.month-year {
+  color: #24385b;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  min-width: 180px;
+  text-align: center;
+}
+
+.nav-btn {
+  padding: 0.6rem 1rem;
+  background-color: #24385b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background-color: #1a2a44;
+  box-shadow: 0 2px 8px rgba(36, 56, 91, 0.2);
+}
+
+.nav-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.day-header {
+  font-weight: 700;
+  color: #24385b;
+  text-align: center;
+  padding: 0.75rem 0.5rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  border: 1px solid #ddd;
+  background-color: white;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.calendar-day:not(:disabled):hover {
+  border-color: #30d5e8;
+  background-color: #e0f7fa;
+  transform: scale(1.05);
+}
+
+.calendar-day.other-month {
+  color: #ccc;
+  background-color: #f5f5f5;
+  cursor: default;
+}
+
+.calendar-day.past:not(.today) {
+  color: #aaa;
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.calendar-day.today {
+  border: 2px solid #30d5e8;
+  background-color: #e0f7fa;
+  color: #24385b;
+  font-weight: 700;
+}
+
+.calendar-day.selected {
+  background-color: #24385b;
+  color: white;
+  border-color: #24385b;
+  font-weight: 700;
+}
+
+.calendar-day:disabled {
+  cursor: not-allowed;
+}
+
+.selected-date-display {
+  text-align: center;
+  color: #24385b;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.8rem;
+  background-color: #e0f7fa;
+  border-radius: 4px;
+  border-left: 3px solid #30d5e8;
+}
+
+/* Asignación de Mentor */
 .mentor-assignment {
   background-color: #e0f7fa;
   border: 2px solid #30d5e8;
@@ -190,6 +325,29 @@ label {
   .fieldset {
     padding: 1rem;
   }
+
+  .calendar-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .month-year {
+    font-size: 1rem;
+  }
+
+  .nav-btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+    width: 100%;
+  }
+
+  .calendar-grid {
+    gap: 0.3rem;
+  }
+
+  .calendar-day {
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -224,6 +382,33 @@ label {
 
   .error-message {
     font-size: 0.7rem;
+  }
+
+  .calendar-container {
+    padding: 1rem;
+  }
+
+  .month-year {
+    font-size: 0.9rem;
+    min-width: 150px;
+  }
+
+  .nav-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  .calendar-grid {
+    gap: 0.2rem;
+  }
+
+  .day-header {
+    font-size: 0.7rem;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .calendar-day {
+    font-size: 0.75rem;
   }
 
   .mentor-badge {
