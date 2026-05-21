@@ -28,6 +28,8 @@ export class PanelMentor implements OnInit {
   currentDate: Date = new Date();
   currentMonth: number = this.currentDate.getMonth();
   currentYear: number = this.currentDate.getFullYear();
+  initialMonth: number = this.currentDate.getMonth();
+  initialYear: number = this.currentDate.getFullYear();
   selectedDay: number | null = null;
   charlasSelecionadas: CharlaProgamada[] = [];
   daysOfWeek: string[] = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sab'];
@@ -60,7 +62,10 @@ export class PanelMentor implements OnInit {
     const primerDia = new Date(this.currentYear, this.currentMonth, 1);
     const ultimoDia = new Date(this.currentYear, this.currentMonth + 1, 0);
     const diaSemanaPrimer = primerDia.getDay();
-    const diasConCharlas = this.mentoriaService.obtenerDiasConCharlas();
+    const diasConCharlas = this.mentoriaService.obtenerDiasConCharlas(
+      this.currentMonth,
+      this.currentYear,
+    );
 
     // Días del mes anterior
     const diasMesAnterior = new Date(this.currentYear, this.currentMonth, 0).getDate();
@@ -82,7 +87,11 @@ export class PanelMentor implements OnInit {
     for (let day = 1; day <= ultimoDia.getDate(); day++) {
       const date = new Date(this.currentYear, this.currentMonth, day);
       const hasCharlas = diasConCharlas.includes(day);
-      const charlas = this.mentoriaService.obtenerCharlasPorDia(day);
+      const charlas = this.mentoriaService.obtenerCharlasPorDia(
+        day,
+        this.currentMonth,
+        this.currentYear,
+      );
 
       this.calendarDays.push({
         date,
@@ -136,5 +145,24 @@ export class PanelMentor implements OnInit {
 
   obtenerNombresCharlas(charlas: CharlaProgamada[]): string {
     return charlas.map((c) => c.centro || 'Sin especificar').join(', ');
+  }
+
+  changeMonth(direction: number): void {
+    this.currentMonth += direction;
+    if (this.currentMonth > 11) {
+      this.currentMonth = 0;
+      this.currentYear++;
+    } else if (this.currentMonth < 0) {
+      this.currentMonth = 11;
+      this.currentYear--;
+    }
+    this.selectedDay = null;
+    this.charlasSelecionadas = [];
+    this.charlasProgramadas = this.mentoriaService.obtenerCharlasProgramadas();
+    this.generarCalendario();
+  }
+
+  canNavigatePrevious(): boolean {
+    return this.currentMonth > this.initialMonth || this.currentYear > this.initialYear;
   }
 }

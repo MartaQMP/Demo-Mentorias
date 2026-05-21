@@ -1,6 +1,6 @@
 .confirmacion-container {
   min-height: calc(100vh - 78px);
-  background-color: #f4f6f9;
+  background: linear-gradient(135deg, #f4f6f9 0%, #e8ecf1 100%);
   padding: 3rem 2rem;
   display: flex;
   align-items: center;
@@ -10,24 +10,38 @@
 .confirmation-section {
   width: 100%;
   max-width: 700px;
+  animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .confirmation-card {
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(36, 56, 91, 0.1);
   padding: 3rem;
+  border: 1px solid rgba(48, 213, 232, 0.1);
 }
 
 h1 {
   color: #24385b;
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin: 0 0 0.8rem 0;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 .subtitle {
-  color: #666;
+  color: #777;
   font-size: 0.95rem;
   margin: 0 0 2.5rem 0;
 }
@@ -35,8 +49,8 @@ h1 {
 .details-sections {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .section {
@@ -45,13 +59,13 @@ h1 {
 
 .section-title {
   color: #24385b;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 0.95rem;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin: 0 0 1.5rem 0;
   padding-bottom: 1rem;
-  border-bottom: 2px solid #30d5e8;
+  border-bottom: 3px solid #30d5e8;
 }
 
 .details-grid {
@@ -63,48 +77,68 @@ h1 {
 .detail-item {
   display: flex;
   flex-direction: column;
-  padding: 1.2rem;
-  background-color: #f9fafb;
-  border-radius: 6px;
-  border-left: 3px solid #30d5e8;
-  transition: all 0.3s ease;
+  padding: 1.3rem;
+  background: linear-gradient(135deg, #f9fafb 0%, #f4f6f8 100%);
+  border-radius: 8px;
+  border: 2px solid rgba(48, 213, 232, 0.15);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #30d5e8, #24385b);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .detail-item:hover {
-  box-shadow: 0 4px 12px rgba(48, 213, 232, 0.15);
-  transform: translateX(3px);
+  box-shadow: 0 6px 20px rgba(48, 213, 232, 0.12);
+  transform: translateY(-2px);
+  border-color: #30d5e8;
+}
+
+.detail-item:hover::before {
+  opacity: 1;
 }
 
 .detail-label {
-  color: #666;
-  font-weight: 600;
+  color: #777;
+  font-weight: 700;
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.4px;
+  margin-bottom: 0.6rem;
 }
 
 .detail-value {
   color: #24385b;
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .mentor-badge-large {
-  background-color: #24385b;
-  color: white;
-  padding: 0.6rem 1rem;
-  border-radius: 4px;
+  background: linear-gradient(135deg, #24385b 0%, #1f2e47 100%);
+  color: #30d5e8;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
   text-align: center;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.9rem;
   display: inline-block;
+  box-shadow: 0 4px 12px rgba(36, 56, 91, 0.2);
 }
 
 .divider {
-  height: 1px;
-  background-color: #e8e8e8;
-  margin: 2rem 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(48, 213, 232, 0.3) 0%, transparent 100%);
+  margin: 2.5rem 0;
 }
 
 .action-buttons {
@@ -115,13 +149,13 @@ h1 {
 
 .btn-confirmar,
 .btn-volver {
-  padding: 0.9rem 2rem;
+  padding: 1rem 2rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   text-decoration: none;
@@ -129,25 +163,32 @@ h1 {
 }
 
 .btn-confirmar {
-  background-color: #24385b;
+  background: linear-gradient(135deg, #24385b 0%, #1f2e47 100%);
   color: white;
+  box-shadow: 0 6px 20px rgba(36, 56, 91, 0.25);
 }
 
 .btn-confirmar:hover {
-  background-color: #1a2a44;
-  box-shadow: 0 4px 15px rgba(36, 56, 91, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(36, 56, 91, 0.4);
+}
+
+.btn-confirmar:active {
+  transform: translateY(-1px);
 }
 
 .btn-volver {
-  background-color: #f0f0f0;
+  background: linear-gradient(135deg, white 0%, #f5f5f5 100%);
   color: #24385b;
-  border: 1px solid #ddd;
+  border: 2px solid #30d5e8;
+  font-weight: 700;
 }
 
 .btn-volver:hover {
-  background-color: #e8e8e8;
+  background: linear-gradient(135deg, #e0f7fa 0%, #d4f0f7 100%);
   border-color: #24385b;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(48, 213, 232, 0.2);
+  transform: translateY(-2px);
 }
 
 .success-alert {
@@ -162,33 +203,57 @@ h1 {
   justify-content: center;
   z-index: 1000;
   padding: 2rem;
+  animation: fadeInOverlay 0.3s ease;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .alert-content {
   background: white;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 2.5rem;
   max-width: 500px;
   width: 100%;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: flex-start;
   gap: 1.5rem;
   position: relative;
+  border: 2px solid #2e7d32;
+  animation: slideUpModal 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUpModal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .alert-icon {
   flex-shrink: 0;
-  width: 50px;
-  height: 50px;
-  background-color: #24385b;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #2e7d32, #1b5e20);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 700;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.2);
 }
 
 .alert-text {
@@ -197,13 +262,13 @@ h1 {
 
 .alert-text h3 {
   color: #24385b;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   margin: 0 0 0.8rem 0;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .alert-text p {
-  color: #666;
+  color: #777;
   margin: 0;
   line-height: 1.6;
   font-size: 0.95rem;
@@ -213,19 +278,22 @@ h1 {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
-  background-color: #f0f0f0;
+  background: linear-gradient(135deg, #f0f0f0, #e8e8e8);
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   color: #24385b;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .alert-close:hover {
-  background-color: #e8e8e8;
+  background: linear-gradient(135deg, #e0e0e0, #d0d0d0);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 @media (max-width: 768px) {

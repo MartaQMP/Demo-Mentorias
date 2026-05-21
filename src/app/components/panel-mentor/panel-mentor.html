@@ -13,6 +13,19 @@
     <div class="calendar-section">
       <h2>Calendario de Charlas</h2>
       <div class="calendar-container">
+        <div class="calendar-header">
+          <button
+            type="button"
+            class="nav-btn"
+            (click)="changeMonth(-1)"
+            [disabled]="!canNavigatePrevious()"
+          >
+            ANTERIOR
+          </button>
+          <h3 class="month-year">{{ monthNames[currentMonth] }} {{ currentYear }}</h3>
+          <button type="button" class="nav-btn" (click)="changeMonth(1)">SIGUIENTE</button>
+        </div>
+
         <div class="calendar-grid">
           <div class="day-header" *ngFor="let dayName of daysOfWeek">
             {{ dayName }}

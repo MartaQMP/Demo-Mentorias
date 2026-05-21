@@ -16,6 +16,7 @@ export interface MentoriaData {
 export interface CharlaProgamada {
   id: number;
   nombre: string;
+  apellidos?: string;
   telefono: string;
   fecha: string;
   hora: string;
@@ -47,7 +48,7 @@ export class MentoriaService {
     mentorAsignado: 0,
   });
 
-  private charlasProgramadas: CharlaProgamada[] = [
+  private charlasProgramadasEstaticas: CharlaProgamada[] = [
     {
       id: 1,
       nombre: 'Juan García López',
@@ -92,7 +93,7 @@ export class MentoriaService {
       id: 5,
       nombre: 'David López Sánchez',
       telefono: '698765432',
-      fecha: '2026-05-29',
+      fecha: '2026-06-03',
       hora: '09:30',
       centro: 'Escuela de Código',
       tema: 'DevOps Docker',
@@ -102,7 +103,7 @@ export class MentoriaService {
       id: 6,
       nombre: 'Laura Martínez García',
       telefono: '645123456',
-      fecha: '2026-05-22',
+      fecha: '2026-06-05',
       hora: '13:00',
       centro: 'Academia Técnica Superior',
       tema: 'Bases de Datos SQL',
@@ -112,7 +113,7 @@ export class MentoriaService {
       id: 7,
       nombre: 'Roberto Sánchez Pérez',
       telefono: '667890123',
-      fecha: '2026-05-24',
+      fecha: '2026-06-08',
       hora: '16:00',
       centro: 'Instituto de Programación',
       tema: 'TypeScript Intermedio',
@@ -122,13 +123,15 @@ export class MentoriaService {
       id: 8,
       nombre: 'Sofía Martínez López',
       telefono: '678901234',
-      fecha: '2026-05-26',
+      fecha: '2026-06-12',
       hora: '10:30',
       centro: 'Bootcamp Desarrollo Web',
       tema: 'APIs REST',
       mentorAsignado: 5,
     },
   ];
+
+  private readonly STORAGE_KEY = 'charlas_mentorias_demo';
 
   // Matriz de 15+ casos de asignación DETERMINISTA
   private casosAsignacion: CasoAsignacion[] = [
@@ -153,6 +156,33 @@ export class MentoriaService {
   public mentoriaData$: Observable<MentoriaData> = this.mentoriaDataSubject.asObservable();
 
   constructor() {}
+
+  private obtenerCharlasDinamicas(): CharlaProgamada[] {
+    try {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  guardarCharlaEnStorage(charla: MentoriaData): void {
+    const charlaProgamada: CharlaProgamada = {
+      id: Date.now(),
+      nombre: charla.nombre,
+      apellidos: charla.apellidos,
+      telefono: charla.telefono,
+      fecha: charla.fecha,
+      hora: charla.hora,
+      centro: charla.centro || 'Sin especificar',
+      tema: charla.tema,
+      mentorAsignado: charla.mentorAsignado,
+    };
+
+    const charlasDinamicas = this.obtenerCharlasDinamicas();
+    charlasDinamicas.push(charlaProgamada);
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(charlasDinamicas));
+  }
 
   guardarMentoria(data: MentoriaData): void {
     this.mentoriaDataSubject.next(data);
@@ -193,24 +223,29 @@ export class MentoriaService {
   }
 
   obtenerCharlasProgramadas(): CharlaProgamada[] {
-    return this.charlasProgramadas;
+    return [...this.charlasProgramadasEstaticas, ...this.obtenerCharlasDinamicas()];
   }
 
-  obtenerDiasConCharlas(): number[] {
-    return Array.from(
-      new Set(
-        this.charlasProgramadas.map((charla) => {
-          const fecha = new Date(charla.fecha);
-          return fecha.getDate();
-        }),
-      ),
-    ).sort((a, b) => a - b);
+  obtenerDiasConCharlas(month: number, year: number): number[] {
+    const charlas = this.obtenerCharlasProgramadas();
+    const diasConCharlas = charlas
+      .filter((charla) => {
+        const fecha = new Date(charla.fecha);
+        return fecha.getMonth() === month && fecha.getFullYear() === year;
+      })
+      .map((charla) => {
+        const fecha = new Date(charla.fecha);
+        return fecha.getDate();
+      });
+
+    return Array.from(new Set(diasConCharlas)).sort((a, b) => a - b);
   }
 
-  obtenerCharlasPorDia(dia: number): CharlaProgamada[] {
-    return this.charlasProgramadas.filter((charla) => {
+  obtenerCharlasPorDia(dia: number, month: number, year: number): CharlaProgamada[] {
+    const charlas = this.obtenerCharlasProgramadas();
+    return charlas.filter((charla) => {
       const fecha = new Date(charla.fecha);
-      return fecha.getDate() === dia;
+      return fecha.getDate() === dia && fecha.getMonth() === month && fecha.getFullYear() === year;
     });
   }
 

@@ -37,6 +37,8 @@ export class Confirmacion implements OnInit {
 
   confirmarCita(): void {
     this.mostrarExito = true;
+    // Guardar en localStorage
+    this.mentoriaService.guardarCharlaEnStorage(this.mentoriaData);
     setTimeout(() => {
       this.mentoriaService.limpiarDatos();
       this.router.navigate(['/']);

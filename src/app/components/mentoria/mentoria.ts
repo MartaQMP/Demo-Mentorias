@@ -164,25 +164,16 @@ export class Mentoria implements OnInit, OnDestroy {
   }
 
   nextMonth(): void {
-    // Permitir navegar solo un mes en el futuro
-    const proximoMes = new Date(this.currentYear, this.currentMonth + 1, 1);
-    const mesActual = new Date();
-
-    if (
-      proximoMes.getMonth() <= mesActual.getMonth() + 1 &&
-      proximoMes.getFullYear() === mesActual.getFullYear()
-    ) {
-      this.currentMonth++;
-      if (this.currentMonth > 11) {
-        this.currentMonth = 0;
-        this.currentYear++;
-      }
-      this.generarCalendario();
+    this.currentMonth++;
+    if (this.currentMonth > 11) {
+      this.currentMonth = 0;
+      this.currentYear++;
     }
+    this.selectedDate = null;
+    this.generarCalendario();
   }
 
   previousMonth(): void {
-    // Bloquear navegación a meses anteriores
     const mesActual = new Date();
     if (this.currentMonth <= mesActual.getMonth() && this.currentYear <= mesActual.getFullYear()) {
       return;
@@ -193,6 +184,7 @@ export class Mentoria implements OnInit, OnDestroy {
       this.currentMonth = 11;
       this.currentYear--;
     }
+    this.selectedDate = null;
     this.generarCalendario();
   }
 

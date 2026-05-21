@@ -1,6 +1,6 @@
 .mentoria-container {
   min-height: calc(100vh - 78px);
-  background-color: #f4f6f9;
+  background: linear-gradient(135deg, #f4f6f9 0%, #e8ecf1 100%);
   padding: 3rem 2rem;
   display: flex;
   align-items: center;
@@ -9,28 +9,42 @@
 
 .form-section {
   width: 100%;
-  max-width: 800px;
+  max-width: 850px;
+  animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .form-card {
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(36, 56, 91, 0.1);
+  padding: 3.5rem;
+  border: 1px solid rgba(48, 213, 232, 0.1);
 }
 
 h1 {
   color: #24385b;
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin: 0 0 0.8rem 0;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 .subtitle {
-  color: #666;
+  color: #777;
   font-size: 0.95rem;
   margin: 0 0 2.5rem 0;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .mentoria-form {
@@ -40,19 +54,26 @@ h1 {
 }
 
 .fieldset {
-  border: 1px solid #e8e8e8;
-  border-radius: 6px;
-  padding: 1.5rem;
+  border: 2px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 2rem;
   margin: 0;
+  background: linear-gradient(135deg, #fafbfc 0%, white 100%);
+  transition: all 0.3s ease;
+}
+
+.fieldset:focus-within {
+  border-color: #30d5e8;
+  box-shadow: 0 0 0 4px rgba(48, 213, 232, 0.1);
 }
 
 .fieldset legend {
   color: #24385b;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.95rem;
-  padding: 0 0.5rem;
+  padding: 0 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
 }
 
 .form-row {
@@ -73,20 +94,20 @@ h1 {
 
 label {
   color: #24385b;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
   font-size: 0.9rem;
 }
 
 .required {
-  color: #d32f2f;
-  font-weight: 700;
+  color: #e53935;
+  font-weight: 800;
 }
 
 .form-input {
-  padding: 0.75rem 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 0.85rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
   font-size: 0.95rem;
   font-family: inherit;
   transition: all 0.3s ease;
@@ -97,17 +118,19 @@ label {
   outline: none;
   border-color: #30d5e8;
   background-color: white;
-  box-shadow: 0 0 0 3px rgba(48, 213, 232, 0.1);
+  box-shadow: 0 0 0 4px rgba(48, 213, 232, 0.1);
+  transform: translateY(-2px);
 }
 
 .form-input::placeholder {
-  color: #aaa;
+  color: #bbb;
 }
 
 .error-message {
-  color: #d32f2f;
+  color: #e53935;
   font-size: 0.75rem;
-  margin-top: 0.3rem;
+  margin-top: 0.4rem;
+  font-weight: 500;
 }
 
 /* Estilos del Calendario Embebido */
@@ -118,53 +141,59 @@ label {
 .calendar-section label {
   display: block;
   margin-bottom: 1rem;
+  color: #24385b;
+  font-weight: 700;
 }
 
 .calendar-container {
-  background-color: #f9f9f9;
-  border: 1px solid #e8e8e8;
-  border-radius: 6px;
-  padding: 1.5rem;
+  background: linear-gradient(135deg, #fafbfc 0%, white 100%);
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(36, 56, 91, 0.08);
 }
 
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   gap: 1rem;
 }
 
 .month-year {
   color: #24385b;
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 800;
   margin: 0;
   min-width: 180px;
   text-align: center;
+  letter-spacing: -0.3px;
 }
 
 .nav-btn {
-  padding: 0.6rem 1rem;
-  background-color: #24385b;
+  padding: 0.7rem 1.3rem;
+  background: linear-gradient(135deg, #24385b 0%, #1f2e47 100%);
   color: white;
   border: none;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
+  box-shadow: 0 3px 10px rgba(36, 56, 91, 0.15);
 }
 
 .nav-btn:hover:not(:disabled) {
-  background-color: #1a2a44;
-  box-shadow: 0 2px 8px rgba(36, 56, 91, 0.2);
+  background: linear-gradient(135deg, #30d5e8 0%, #00a3b8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(48, 213, 232, 0.3);
 }
 
 .nav-btn:disabled {
-  background-color: #ccc;
+  background: linear-gradient(135deg, #d0d0d0 0%, #b5b5b5 100%);
   cursor: not-allowed;
   opacity: 0.5;
 }
@@ -172,61 +201,67 @@ label {
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
+  gap: 0.6rem;
   margin-bottom: 1.5rem;
 }
 
 .day-header {
-  font-weight: 700;
+  font-weight: 800;
   color: #24385b;
   text-align: center;
-  padding: 0.75rem 0.5rem;
-  font-size: 0.85rem;
+  padding: 0.8rem 0.5rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .calendar-day {
   aspect-ratio: 1;
-  border: 1px solid #ddd;
+  border: 2px solid #e0e0e0;
   background-color: white;
   color: #333;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  border-radius: 6px;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   font-size: 0.9rem;
 }
 
 .calendar-day:not(:disabled):hover {
   border-color: #30d5e8;
-  background-color: #e0f7fa;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #e0f7fa 0%, #d4f0f7 100%);
+  transform: scale(1.08);
+  box-shadow: 0 4px 10px rgba(48, 213, 232, 0.2);
 }
 
 .calendar-day.other-month {
-  color: #ccc;
-  background-color: #f5f5f5;
+  color: #ddd;
+  background-color: #f9f9f9;
   cursor: default;
+  border-color: #e8e8e8;
 }
 
 .calendar-day.past:not(.today) {
   color: #aaa;
   background-color: #f5f5f5;
   cursor: not-allowed;
+  border-color: #e8e8e8;
 }
 
 .calendar-day.today {
   border: 2px solid #30d5e8;
-  background-color: #e0f7fa;
+  background: linear-gradient(135deg, #e0f7fa 0%, #d4f0f7 100%);
   color: #24385b;
-  font-weight: 700;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(48, 213, 232, 0.25);
 }
 
 .calendar-day.selected {
-  background-color: #24385b;
-  color: white;
+  background: linear-gradient(135deg, #24385b 0%, #1f2e47 100%);
+  color: #30d5e8;
   border-color: #24385b;
-  font-weight: 700;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(36, 56, 91, 0.3);
 }
 
 .calendar-day:disabled {
@@ -236,21 +271,23 @@ label {
 .selected-date-display {
   text-align: center;
   color: #24385b;
-  font-weight: 600;
-  font-size: 0.9rem;
-  padding: 0.8rem;
-  background-color: #e0f7fa;
-  border-radius: 4px;
-  border-left: 3px solid #30d5e8;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 1rem 1.2rem;
+  background: linear-gradient(135deg, #e0f7fa 0%, #d4f0f7 100%);
+  border-radius: 6px;
+  border-left: 4px solid #30d5e8;
+  box-shadow: 0 2px 8px rgba(48, 213, 232, 0.15);
 }
 
 /* Asignación de Mentor */
 .mentor-assignment {
-  background-color: #e0f7fa;
+  background: linear-gradient(135deg, #e0f7fa 0%, #d4f0f7 100%);
   border: 2px solid #30d5e8;
-  border-radius: 6px;
-  padding: 1.5rem;
+  border-radius: 8px;
+  padding: 1.8rem;
   text-align: center;
+  box-shadow: 0 4px 12px rgba(48, 213, 232, 0.15);
 }
 
 .mentor-badge {
@@ -263,43 +300,49 @@ label {
 
 .mentor-label {
   color: #24385b;
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 700;
+  font-size: 0.95rem;
 }
 
 .mentor-number {
-  background-color: #24385b;
-  color: white;
-  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, #24385b 0%, #1f2e47 100%);
+  color: #30d5e8;
+  padding: 0.7rem 1.5rem;
   border-radius: 50px;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.95rem;
-  min-width: 120px;
+  min-width: 130px;
   text-align: center;
+  box-shadow: 0 4px 12px rgba(36, 56, 91, 0.2);
 }
 
 .btn-revisar {
-  padding: 0.9rem 2rem;
-  background-color: #24385b;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #24385b 0%, #1f2e47 100%);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   margin-top: 1rem;
+  box-shadow: 0 6px 20px rgba(36, 56, 91, 0.25);
 }
 
 .btn-revisar:hover:not(:disabled) {
-  background-color: #1a2a44;
-  box-shadow: 0 4px 15px rgba(36, 56, 91, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(36, 56, 91, 0.4);
+}
+
+.btn-revisar:active:not(:disabled) {
+  transform: translateY(-1px);
 }
 
 .btn-revisar:disabled {
-  background-color: #ccc;
+  background: linear-gradient(135deg, #d0d0d0 0%, #b5b5b5 100%);
   cursor: not-allowed;
   opacity: 0.6;
 }
